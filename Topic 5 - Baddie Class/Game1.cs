@@ -28,6 +28,7 @@ namespace Topic_5___Baddie_Class
         Texture2D marioTexture;
         MouseState mouseState;
         Random random;
+        Ghost ghost1;
 
 
         public Game1()
@@ -50,6 +51,8 @@ namespace Topic_5___Baddie_Class
             screen = Screen.House;
 
             base.Initialize();
+
+            ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
         }
 
         protected override void LoadContent()
@@ -67,7 +70,7 @@ namespace Topic_5___Baddie_Class
 
             for (int i = 1; i <= 8; i++)
             {
-                ghostTextures.Add(Content.Load<Texture2D>("boo-" + i));
+                ghostTextures.Add(Content.Load<Texture2D>("boo-move-" + i));
             }
 
         }
@@ -93,6 +96,7 @@ namespace Topic_5___Baddie_Class
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(houseTexture, window, Color.White);
+            ghost1.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
