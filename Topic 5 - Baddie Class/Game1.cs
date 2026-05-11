@@ -83,6 +83,7 @@ namespace Topic_5___Baddie_Class
             // TODO: Add your update logic here
 
             mouseState = Mouse.GetState();
+            ghost1.Update(mouseState);
 
             base.Update(gameTime);
         }
@@ -102,5 +103,6 @@ namespace Topic_5___Baddie_Class
 
             base.Draw(gameTime);
         }
+
     }
 }
