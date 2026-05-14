@@ -29,6 +29,7 @@ namespace Topic_5___Baddie_Class
         MouseState mouseState;
         Random random;
         Ghost ghost1;
+        KeyboardState keyboardState;
 
 
         public Game1()
@@ -48,6 +49,7 @@ namespace Topic_5___Baddie_Class
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
 
+            screen = Screen.Title;
             screen = Screen.House;
 
             base.Initialize();
@@ -82,8 +84,22 @@ namespace Topic_5___Baddie_Class
 
             // TODO: Add your update logic here
 
+            keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
-            ghost1.Update(mouseState);
+            ghost1.Update(gameTime, mouseState);
+            if (screen == Screen.Title)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                    screen = Screen.House;
+
+            }
+            else if (screen == Screen.House)
+            {
+                ghost1.Update(gameTime, mouseState);
+                if (ghost1.Contains(mouseState.Position))
+                    screen = Screen.End;
+
+            }
 
             base.Update(gameTime);
         }
@@ -96,8 +112,15 @@ namespace Topic_5___Baddie_Class
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(houseTexture, window, Color.White);
-            ghost1.Draw(_spriteBatch);
+            if (screen == Screen.Title)
+                _spriteBatch.Draw(titleTexture, window, Color.White);
+            else if (screen == Screen.House)
+            {
+                _spriteBatch.Draw(houseTexture, window, Color.White);
+                ghost1.Draw(_spriteBatch);
+            }
+            else
+                _spriteBatch.Draw(endTexture, window, Color.White);
 
             _spriteBatch.End();
 
