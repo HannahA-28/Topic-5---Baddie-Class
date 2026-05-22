@@ -50,7 +50,6 @@ namespace Topic_5___Baddie_Class
             _graphics.PreferredBackBufferHeight = window.Height;
 
             screen = Screen.Title;
-            screen = Screen.House;
 
             base.Initialize();
 
